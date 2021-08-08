@@ -23,6 +23,8 @@ return `${day} ${hours}:${minutes}`;
 }
 
 function displayTemp(response) {
+    celsiusTemp = response.data.main.temp;
+
     let cityElement = document.querySelector("#city");
     cityElement.innerHTML = response.data.name;
     
@@ -30,7 +32,7 @@ function displayTemp(response) {
     conditionsElement.innerHTML = response.data.weather[0].description;
 
     let tempElement = document.querySelector("#temp");
-    tempElement.innerHTML = Math.round(response.data.main.temp);
+    tempElement.innerHTML = Math.round(celsiusTemp);
 
     let humidityElement = document.querySelector("#humidity");
     humidityElement.innerHTML = response.data.main.humidity;
@@ -54,7 +56,33 @@ function search(city) {
     axios.get(apiUrl).then(displayTemp);
 }
 
-search("Charlotte");
+function displayFahrenheitTemp(event) {
+    event.preventDefault();
+    fahrenheitLink.classList.add("active");
+    celsiusLink.classList.remove("active");
+    let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+    let tempElement = document.querySelector("#temp");
+    tempElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+function displayCelsiusTemp(event) {
+    event.preventDefault();
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let tempElement = document.querySelector("#temp");
+    tempElement.innerHTML = Math.round(celsiusTemp);
+}
+
+let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+
+
+search("Charlotte");
