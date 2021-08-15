@@ -66,7 +66,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
     let apiKey = "f5e66638242de3dc22bd15c331cb267e";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayForecast);
 }
 
@@ -109,36 +109,11 @@ function handleSubmit(event) {
 
 function search(city) {
     let apiKey = "f5e66638242de3dc22bd15c331cb267e";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayTemp);
 }
 
-function displayFahrenheitTemp(event) {
-    event.preventDefault();
-    fahrenheitLink.classList.add("active");
-    celsiusLink.classList.remove("active");
-    let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
-    let tempElement = document.querySelector("#temp");
-    tempElement.innerHTML = Math.round(fahrenheitTemp);
-}
-
-function displayCelsiusTemp(event) {
-    event.preventDefault();
-    celsiusLink.classList.add("active");
-    fahrenheitLink.classList.remove("active");
-    let tempElement = document.querySelector("#temp");
-    tempElement.innerHTML = Math.round(celsiusTemp);
-}
-
-let celsiusTemp = null;
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemp);
 
 search("Charlotte");
