@@ -25,12 +25,13 @@ li {
     line-height: 19px;
 }
 
-li:first-letter {
-    text-transform: capitalize;
+a {
+    text-decoration: none;
+    color: #ec6e4c;
 }
 
-a:link {
-    text-decoration: none;
+li:first-letter {
+    text-transform: capitalize;
 }
 
 .float-left {
@@ -58,28 +59,23 @@ a:link {
 }
 
 .weather-temperature strong {
-    color: #212121;
+    color: #1d1f23;
     font-size: 64px;
     line-height: 1;
     font-weight: 400;
 }
 
 .weather-temperature .units {
-    color: #212121; 
+    color: #1d1f23; 
     position: relative;
     font-size: 16px;
     top: -34px;
 }
 
-.weather-temperature .active {
-    color:#212121;
-    cursor: default;
-}
-
 .weather-forecast {
     margin-top: 20px;
     text-align: center;
-    color: #000;
+    color: #1d1f23;
 }
 
 .weather-forecast-date {
